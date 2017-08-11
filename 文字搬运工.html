@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文字搬运工</title>
+<style type="text/css">
+	#box{
+		width:700px;
+		border: 5px solid #ccc;
+		margin: 0 auto;
+		font-size: 12px;
+	}
+	#box:after{
+		content: '';
+		display: block;
+		clear: both;
+	}
+	textarea,p{
+		width: 280px;
+		height: 200px;
+		border: 1px dotted black;
+		resize: none;
+		margin: 10px;
+		float: left;
+	}
+	#box div{
+		float: left;
+		width: 90px;
+	}
+	a,span{
+		text-decoration: none;
+		display: block;
+		line-height: 40px;
+		width:90px;
+		background-color: #F76300;
+		color: white;
+		margin-top: 10px;
+		text-align: center;
+	}
+	a:hover{
+		background-color: #C65218;
+	}
+	span{
+		background-color: white;
+		color:black;
+		font-weight: bold;
+	}
+	p{
+		float: right;
+		background-color: #63EFF7;
+	}
+	ul{
+		margin: 0;
+		padding: 0;
+		opacity: 0;
+	}
+	li{
+		width: 9px;
+		height: 9px;
+		list-style-type: none;
+		margin: 0 1px;
+		background-color:#FF6600;
+		float: left;
+	}
+	.active{
+		background-color: red;
+	}
+</style>
+</head>
+<body>
+	<div id="box">
+		<textarea>WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其打包为合适的格式以供浏览器使用。</textarea>
+		<div>
+			<a href="javascript:;">把文字右移</a>
+			<span>0/0</span>
+			<ul>
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		
+		<p></p>
+	</div>
+</body>
+<script type="text/javascript">
+	var oText = document.getElementsByTagName('textarea')[0];;
+	var btn = document.getElementsByTagName('a')[0];
+	var span = document.getElementsByTagName('span')[0];
+	var oP = document.getElementsByTagName('p')[0];
+	var max = oText.value.length+oP.innerHTML.length;
+	span.innerHTML = '0/'+max;
+	btn.onclick = function(){
+		var max = oText.value.length+oP.innerHTML.length;
+		var timer = setInterval(
+			function(){
+				oP.innerHTML += oText.value.substr(0,1);
+				oText.value = oText.value.substr(1);
+				span.innerHTML = oP.innerHTML.length+'/'+max;
+				if(oText.value.length==0){
+					clearInterval(timer);
+				}
+			}
+		,20)
+	}
+</script>
+</html>
